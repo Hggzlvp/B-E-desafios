@@ -1,0 +1,30 @@
+
+[	
+	{
+		"name": "Notebook 14´ iQual NQ5 ",
+		"description": "Notebook",
+		"price": 209000,
+		"stock": 6,
+        "categoryId":"6388070953576b9c550aa2db"
+    },
+	{
+		"id": "cda7d2a9-4ac0-4a1e-8c9d-098e65be799b",
+		"timestamp": "7/11/2022 20:17:32",
+		"title": "Notebook Lenovo IdeaPad 14´ 4GB 256GB Core i3",
+		"description": "Notebook",
+		"cod": 1000,
+		"img": "https://images.fravega.com/f300/2cca0c581600f32e27c94ad996696693.jpg.web",
+		"price": 650000,
+		"stock": 7
+	},
+	{
+		"id": "bd91683a-c550-4747-8f3b-53fc76a5b9e0",
+		"timestamp": "7/11/2022 20:31:57",
+		"title": "Notebook Lenovo IdeaPad 15´ 3GB 244GB Core i5",
+		"description": "Notebook",
+		"cod": 3434,
+		"img": "https://images.fravega.com/f300/2cca0c581600f32e2dfgdfgd6693.jpg.web",
+		"price": 133000,
+		"stock": 4
+	}
+]

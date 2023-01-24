@@ -1,0 +1,234 @@
+import fs from "fs"
+import { v4 as uuidv4 } from 'uuid'
+import { instanciaDeProductos } from "./logicaProducts.js";
+// const {instanciaDeProductos}=require("../controller/logicaProducts")
+// import {instanciaDeProductos} from "../controller/logicaProducts"
+
+class ApiCart {
+
+    constructor(archivo) {
+            this.archivo = archivo;
+    }
+
+    //Funciones----------------------------------------------------------------------------------------------
+
+    // read = Lee el producto
+    async read() {
+        try {
+            const data = await fs.promises.readFile(this.archivo , "utf-8");
+            const datos=JSON.parse(data);
+            return datos;
+    
+        } catch (error) {
+            console.log(error)
+        }
+       
+    }   
+    // escribe el producto con las tabulaciones
+    async guardarProductos(productos){
+        try {
+            const data= JSON.stringify(productos,null,"\t")
+            fs.promises.writeFile(this.archivo,data)
+        } catch (error) {
+            console.log(error)
+        }
+        
+    
+    }
+    // Validacion de datos
+    validationBody(body){
+        if(
+            !body.title ||
+            !body.cod   || body.cod   !== 'number' ||
+            !body.price || body.price !== 'number' ||
+            !body.stock || body.stock !== 'number'
+
+        ){
+            return false
+        }else{
+            return true
+        }
+    }
+
+
+    //Aca empieza el manejo de Cart ---------------------------------------------------------------------
+
+    async createCart() {
+        try {
+        const dataJSON= await this.read();
+        console.log(dataJSON)
+
+        const newCart = 
+        {
+            id: uuidv4(),
+            timestap: new Date().toLocaleString(),
+            productos: []
+        };
+        // console.log(newCart)
+        dataJSON.push(newCart);
+
+        this.guardarProductos(dataJSON);
+
+        return newCart.id;
+        } catch (error) {
+        console.log(error);
+        }
+    }
+
+    async deleteCart(id) {
+        try {
+        const data= await this.read();
+        const index = data.findIndex((itemId) => itemId.id === id);
+
+        if (index < 0) {
+            throw "El producto no existe";
+        }
+        data.splice(index, 1);
+
+        await this.guardarProductos(data);
+        } catch (error) {
+        console.log(error);
+        }
+    }
+
+    async productsByCartId(id) {
+        try{
+        const data = await this.read();
+        const index = data.findIndex((itemId) => itemId.id === id);
+        if (index < 0) {
+            throw "El producto no existe";
+        }
+
+        return data[index].productos;
+
+        }catch(error){
+        console.log(error)
+        }
+    }
+
+    async addProductToCart(idCart, idProduct) {
+        try{
+            const dataCart = await this.read("cart");
+            console.log(dataCart) //Ambos console.log() me tiran la misma data
+            const dataProducto = await instanciaDeProductos.read("productos")
+            console.log(dataProducto)
+            
+            const indexCart = dataCart.findIndex((itemId) => itemId.id === idCart);
+            const indexProducto = dataProducto.findIndex((itemId) => itemId.id === idProduct)
+
+            if (indexCart < 0) {
+            throw "El carrito no existe";
+            }
+            if (indexProducto < 0) {
+            throw "El producto no existe";
+            }
+            
+            dataCart[indexCart].productos.push(dataProducto[indexProducto])
+        
+            await this.guardarProductos(dataCart,'cart') 
+
+        }catch(error){
+            console.log(error);
+            
+        }
+
+    }
+
+    async deleteProductToCart(idCart, idProduct){
+        try{
+        const dataCart = await this.read("cart");
+        const indexCart = dataCart.findIndex((itemId) => itemId.id === idCart);
+
+            if (indexCart < 0) {
+                throw "El carrito no existe";
+            }
+
+            const indexProducto = dataCart[indexCart].productos.findIndex((itemId) => itemId.id === idProduct)
+
+            if (indexProducto < 0) {
+            throw "El producto no existe";
+            }
+
+            dataCart[indexCart].productos.splice(indexProducto,1)
+            await this.guardarProductos(dataCart,'cart')
+
+        }catch(error){
+            console.log(error)
+        }
+
+    }
+
+}
+
+export const instanciaDeCart = new ApiCart("cart.json")
+
+
+// module.exports = {
+//     instanciaDeCart : instanciaDeCart
+// }
+
+
+-------------------------------------------
+
+
+
+router.get("/:id/productos",async (req, res) => {
+        
+        const id = req.params.id;
+        const data = await instanciaDeCart.productsByCartId(id);
+
+        res.json({
+            data,
+        });
+        
+    }
+);
+
+router.post("/",async (req, res) => {
+        
+        const idCart = await instanciaDeCart.createCart();
+
+        res.json({
+         msg: `El ID del carrito creado es: ${idCart}`,
+        });   
+    }
+);
+
+router.post("/:id/productos",async (req, res) => {
+    
+        const idCart = req.params.id;
+        const idProduct = req.body.id;
+
+        await instanciaDeCart.addProductToCart(idCart, idProduct);
+        
+        res.json({
+            msg: `El producto con id:${idProduct} se ha agregado correctamente al cart con id: ${idCart}`,
+        });
+    }
+);
+
+router.delete("/:id",async (req, res) => {
+            
+        const id = req.params.id;
+    
+        await instanciaDeCart.deleteCart(id);
+    
+        res.json({
+            msg: `El elemento con Id: ${id} se a eliminado correctamente`,
+        });
+    
+    }
+);
+
+router.delete("/:id/productos/:id_prod", async (req, res) => {
+        
+        const idCart = req.params.id;
+        const idProduct = req.params.id_prod;
+            
+        await instanciaDeCart.deleteProductToCart(idCart, idProduct);
+            
+        res.json({
+            msg: `El producto con id: ${idProduct}, fue eliminado del carrito: ${idCart}`,
+        });
+    }
+);

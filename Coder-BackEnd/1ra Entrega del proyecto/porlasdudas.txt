@@ -1,0 +1,46 @@
+const {Router} = require("express");
+const router = Router();
+
+//Importacion de archivos
+const {instanciaDeProductos}=require("../controller/logicaProducts")
+
+router.get("/",async (req,res)=>{
+    productos=await instanciaDeProductos.getAll();
+    res.json({
+        msg:productos
+    })
+})
+
+router.get("/:id",async (req,res)=>{
+
+    id=JSON.parse(req.params.id);
+    productoEncontrado=await instanciaDeProductos.getById(id);
+    res.json({
+        msg:productoEncontrado
+    })
+
+})
+
+router.post("/",async (req,res)=>{
+    body=req.body;
+    productoGuardado=await instanciaDeProductos.save(body);
+    res.json({
+        msg:productoGuardado
+    })
+})
+
+router.put("/:id",async (req,res)=>{
+    res.json({
+        msg:"actualizando producto por id"
+    })
+})
+
+router.delete("/:id",async (req,res)=>{
+    id=JSON.parse(req.params.id);
+    res.json({
+        msg:await instanciaDeProductos.deleteById(id)
+    })
+})
+
+
+module.exports=router;

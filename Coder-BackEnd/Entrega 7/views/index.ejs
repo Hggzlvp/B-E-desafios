@@ -1,0 +1,51 @@
+<%- include("partials/header") %>
+
+
+   <div class="container pt-5 d-flex justify-content-center align-items-center">
+
+    <div class="card bg-dark text-white text-center">
+
+        <div class="card-header">
+            <h4>Ingresar productos</h4>
+        </div>
+        <div class="card-body">
+            <form id="productForm" method="post" >
+
+                <label for="text"></label>
+                <input id="productName" type="text" placeholder="Ingresar nombre">
+
+                <label for="number"></label>
+                <input id="productPrice" type="number" placeholder="Ingresar precio">
+
+                <!-- <label for="URL"></label>
+                <input type="url" placeholder="Ingresar  URL"> -->
+
+                <button type="submit" class="btn btn-danger">
+                    Agregar Producto
+                </button>
+            </form>
+        </div>
+
+    </div>
+   </div>
+   <div class="container vh-100 d-flex justify-content-center align-items-center">
+    <table id="nuevosProductos" class="table table-dark table-striped">
+        <thead>
+          <tr>
+            <th scope="col">ID</th>
+            <th scope="col">Nombre</th>
+            <th scope="col">Precio</th>
+            <th scope="col">URL</th>
+          </tr>
+        </thead>
+        <!-- aca van los productos en vivo -->
+      </table>
+
+</div> 
+
+
+  <script src="/socket.io/socket.io.js"></script>
+  <script src="./main.js"></script>
+
+
+<%- include("partials/footer") %>

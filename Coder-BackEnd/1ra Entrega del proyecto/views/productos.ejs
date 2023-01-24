@@ -1,0 +1,28 @@
+<%- include("partials/header") %>
+<div class="container vh-100 d-flex justify-content-center align-items-center">
+    <table class="table table-dark table-striped">
+        <thead>
+          <tr>
+            <th scope="col">ID</th>
+            <th scope="col">Nombre</th>
+            <th scope="col">Precio</th>
+            <th scope="col">URL</th>
+          </tr>
+        </thead>
+        <% if(productos.length) { %>
+        <tbody>
+          <% productos.forEach(producto => { %>
+          <tr>
+            <th scope="row"><%= producto.id %></th>
+            <td><%= producto.title %></td>
+            <td><%= producto.price %></td>
+            <td>@mdo</td>
+          </tr>
+        <% }) %>
+        </tbody>
+        <% } %>
+      </table>
+
+</div>
+
+<%- include("partials/footer") %>

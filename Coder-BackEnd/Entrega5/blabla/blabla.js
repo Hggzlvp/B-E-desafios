@@ -1,4 +1,4 @@
-//Array de objetos con los productos
+//Array de objetos con los productos 454554645
 let productos= [
     {
         id:1,

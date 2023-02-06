@@ -30,6 +30,10 @@ if (modo === "cluster" && cluster.isPrimary) {
   });
 } else {
 
+  app.get("/",(req,res) =>{
+    res.status(200).send("Bienvenido al deploy de Railway")
+  });
+
   app.get('/api/randoms',randoms, (req, res) => {
     logger.info(`${req.route} - ${req.method}`)
   });

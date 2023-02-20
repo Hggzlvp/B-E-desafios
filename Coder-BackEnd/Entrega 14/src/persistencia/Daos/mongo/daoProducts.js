@@ -63,3 +63,4 @@ export const deleteProduct = async (id) => {
         logger.fatal(error);
     }
 }
+

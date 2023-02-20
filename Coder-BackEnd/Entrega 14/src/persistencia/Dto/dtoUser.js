@@ -8,7 +8,7 @@ export default class UserDTO{
     }
 }
 
-export const userDto = (data) => {
+export const usersDto = (data) => {
     if(Array.isArray(data)){
         return data.map(user => new UserDTO(user))
     }else{

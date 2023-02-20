@@ -1,19 +1,19 @@
-import {logger} from '../../../logs/news.logs.js'; 
+import {logger} from '../../../utils/logger.js'; 
 import mongoose from 'mongoose';
 import dotenv from 'dotenv';
+
+
 dotenv.config();
 
-export default class DaoMongo {
-    static init() {
-        mongoose.connect(process.env.MONGO_URL, (err) => {
-            if(err){
-                logger.fatal(err)
-            } else {
-                logger.info('Conectado a MongoDB!')
-            }
-        });
-    }
 
+    export const initDaoMongo = () => {
 
-
+        mongoose.connect(process.env.MONGO_ATLAS_SRV, (err) => {
+        if(err){
+            logger.fatal(err)
+        } else {
+            logger.info('Conectado a MongoDB!')
+        }
+    });
 }
+

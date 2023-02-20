@@ -8,7 +8,7 @@ export default class CartsDTO{
     }
 }
 
-export const CartDto = (data) => {
+export const cartsDto = (data) => {
     if(Array.isArray(data)){
         return data.map(cart => new CartsDTO(cart))
     }else{

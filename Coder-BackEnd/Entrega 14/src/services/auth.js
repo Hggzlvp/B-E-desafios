@@ -3,6 +3,8 @@ import { Strategy as LocalStrategy } from 'passport-local';
 import { UserModel } from '../models/user.model.js';
 import { logger } from '../utils/logger.js';
 
+import {signupf} from "../persistencia/Repository/repostory.js"
+
 const currentUser={}
 
 const strategyOptions = {
@@ -15,7 +17,8 @@ const signup = async (req, username, password, done) => {
   logger.info('SIGNUP!');
   try {
     const {email,number}= req.body
-    const newUser = new UserModel({username, password,email,number});
+    // const newUser = new UserModel({username, password,email,number});
+    const newUser = signupf({username, password,email,number})
     newUser.password = await newUser.encryptPassword(password);
     await newUser.save();
     return done(null, newUser);

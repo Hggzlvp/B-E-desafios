@@ -5,7 +5,7 @@ import passport from 'passport';
 import { loginFunc, signUpFunc } from './services/auth.js';
 import MongoStore from 'connect-mongo';
 import Config from './config/index.js';
-import { initDb } from './db/database.js';
+// import { initDb } from './db/database.js';
 import { logger } from './utils/logger.js';
 
 import * as dotenv from 'dotenv';
@@ -57,8 +57,8 @@ if (modo === "cluster" && cluster.isPrimary) {
   });
 } else {
 
-await initDb();
-logger.info('Conectado a la DB!');
+// await initDb();
+// logger.info('Conectado a la DB!');
 
 passport.use('login', loginFunc);
 passport.use('signup', signUpFunc);

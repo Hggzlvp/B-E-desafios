@@ -1,13 +1,13 @@
 import { CartModel } from '../models/cart.js';
 import {sendMailEthereal} from "../services/email.services.js"
 import { sendSMS,sendWSP } from '../services/twilio.services.js';
-import { buyCartf, createCartf, deleteCartbuyf, deleteCartf, deleteProductByCartf, getAllCartf, getCartByIdf, productsByCartIdf } from '../persistencia/Repository/repostory.js';
+import { buyCartR, createCartR, deleteCartbuyR, deleteCartR, deleteProductByCartR, getAllCartR, getCartByIdR, productsByCartIdR } from '../persistencia/Repository/repostory.js';
 
 
 export const getAllCart = async (req, res) => {
   try {
     // const cart = await CartModel.find();
-    const cart = await getAllCartf()
+    const cart = await getAllCartR()
     res.json({
       data: cart
     });
@@ -23,7 +23,7 @@ export const getCartById = async (req, res) => {
   try {
     const { id } = req.params;
     // const cart = await CartModel.findById(id)
-    const cart= await getCartByIdf(id)
+    const cart= await getCartByIdR(id)
     if(!cart)
      return res.status(404).json({
       msg: 'Carrito no encontrado!'
@@ -45,7 +45,7 @@ export const createCart = async (req, res) => {
         productos:[],
     };
     // const cart = await CartModel.create(newCart)
-    const cart=await createCartf(newCart)
+    const cart=await createCartR(newCart)
     // return cart?._id.toString()
 
     res.json({
@@ -63,7 +63,7 @@ export const deleteCart = async (req, res) => {
   try {
     const {id} = req.params;
     // await CartModel.findByIdAndDelete(id);
-    await deleteCartf(id)
+    await deleteCartR(id)
     res.json({
       msg: 'carrito eliminado correctamente'
     })
@@ -78,7 +78,7 @@ export const deleteCartbuy = async (req, res) => {
   try {
     const {id} = req.params;
     // await CartModel.findByIdAndDelete(id);
-    await deleteCartbuyf(id)
+    await deleteCartbuyR(id)
     res.json({
       msg: 'carrito eliminado correctamente'
     })
@@ -96,7 +96,7 @@ export const deleteProductByCart = async (req, res) => {
         const idProduct=id;
 
         // const dataCart = await CartModel.findById(idCart);
-        const dataCart = await deleteProductByCartf(idCart);
+        const dataCart = await deleteProductByCartR(idCart);
 
         const indexProducto = dataCart.productos.findIndex((itemId) => itemId.id == idProduct)
 
@@ -128,8 +128,8 @@ export const productsByCartId= async (req,res) => {
 
     // const dataCart = await CartModel.findById(idCart)
     // const dataProduct= await ProductsModel.findById(idProduct)
-    dataCart = await productsByCartIdf(idCart);
-    dataProduct = await productsByCartIdf(idProduct)
+    dataCart = await productsByCartIdR(idCart);
+    dataProduct = await productsByCartIdR(idProduct)
 
     dataCart.productos.push(dataProduct)
 
@@ -151,7 +151,7 @@ export const buyCart= async (req,res) => {
     
   const idCart=req.params.id;
   // const dataCart = await CartModel.findById(idCart)
-  const dataCart = await buyCartf(idCart);
+  const dataCart = await buyCartR(idCart);
   const nombresProductos= dataCart.productos.map(x => x.name)
     
   await sendMailEthereal("Compra de pepito",nombresProductos.toLocaleString())

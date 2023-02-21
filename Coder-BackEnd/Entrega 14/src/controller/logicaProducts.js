@@ -1,4 +1,5 @@
 import { ProductsModel } from "../models/productos.js";
+import { checkBodyProductR, createProductR, deleteProductR, getAllProductsR, getProductByIdR, updateProductR } from "../persistencia/Repository/repostory.js";
 
     export const checkBodyProduct = async (req, res, next) => {
         const { name, description, stock, price, categoryId } = req.body;
@@ -8,7 +9,8 @@ import { ProductsModel } from "../models/productos.js";
             msg: 'faltan campos del cuerpo',
         });
     
-        const category = await ProductsModel.findById(categoryId);
+        // const category = await ProductsModel.findById(categoryId);
+        const category = await checkBodyProductR(categoryId)
     
         if (!category)
         return res.status(400).json({
@@ -28,7 +30,8 @@ import { ProductsModel } from "../models/productos.js";
             query.categoryId = categoryId;
         }
         
-        const products = await ProductsModel.find(query)
+        // const products = await ProductsModel.find(query)
+        const products = await getAllProductsR(query)
         res.json({
                 data:products
         })
@@ -44,7 +47,8 @@ import { ProductsModel } from "../models/productos.js";
         
         try {
             const {id} =req.params;
-            const product= await ProductsModel.findById(id);
+            // const product= await ProductsModel.findById(id);
+            const product = await getProductByIdR(id)
             if(!product)
             return res.status(404).json({
                 msg:"producto no encontrado"
@@ -65,7 +69,14 @@ import { ProductsModel } from "../models/productos.js";
         try {
             const {name,description,stock,price,categoryId}=req.body;
 
-            const newProduct= await ProductsModel.create({
+            // const newProduct= await ProductsModel.create({
+            //     name,
+            //     description,
+            //     stock,
+            //     price,
+            //     categoryId,
+            // })
+            const newProduct= await createProductR.create({
                 name,
                 description,
                 stock,
@@ -84,13 +95,15 @@ import { ProductsModel } from "../models/productos.js";
         }     
     }
 
+    // DUDA POR 2 CONSULTAS A LA DATABASE
     export const updateProduct= async (req,res) => {
         
         try {
             const {id} = req.params;
             const {name,description,stock,price,categoryId}=req.body;
 
-            const product=await ProductsModel.findById(id);
+            // const product=await ProductsModel.findById(id);
+            const product=await updateProductR(id)
             
             if(!product)
             return res.status(404).json({
@@ -117,7 +130,8 @@ import { ProductsModel } from "../models/productos.js";
     export const deleteProduct = async (req, res) => {
         try {
           const { id } = req.params;
-          await ProductsModel.findByIdAndDelete(id);
+        //   await ProductsModel.findByIdAndDelete(id);
+        await deleteProductR(id)
           res.json({
             msg: 'product deleted!'
           })

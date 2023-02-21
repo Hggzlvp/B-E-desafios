@@ -1,9 +1,10 @@
-import { CategoryModel } from '../models/categorias.js';
+import { createCategoryR, getAllCategoriesR, getCartByIdR, updateCategoryR } from '../persistencia/Repository/repostory.js';
 
 
 export const getAllCategories = async (req, res) => {
   try {
-    const categories = await CategoryModel.find();
+    // const categories = await CategoryModel.find();
+    const categories = await getAllCategoriesR()
     res.json({
       data: categories
     });
@@ -18,7 +19,8 @@ export const getAllCategories = async (req, res) => {
 export const getCategoryById = async (req, res) => {
   try {
     const { id } = req.params;
-    const category = await CategoryModel.findById(id)
+    // const category = await CategoryModel.findById(id)
+    const category = await getCartByIdR(id)
     if(!category)
      return res.status(404).json({
       msg: 'Category not found!'
@@ -36,7 +38,11 @@ export const getCategoryById = async (req, res) => {
 export const createCategory = async (req, res) => {
   try {
     const { name, description } = req.body;
-    const newCategory = await CategoryModel.create({
+    // const newCategory = await CategoryModel.create({
+    //   name, 
+    //   description,
+    // });
+    const newCategory = await createCategoryR({
       name, 
       description,
     });
@@ -55,7 +61,12 @@ export const updateCategory = async (req, res) => {
   try {
     const { id } = req.params;
     const { name, description } = req.body;
-    const categoryUpdated = await CategoryModel.findByIdAndUpdate(
+    // const categoryUpdated = await CategoryModel.findByIdAndUpdate(
+    //   id,
+    //   {name, description},
+    //   {new: true}
+    // );
+    const categoryUpdated = await updateCategoryR(
       id,
       {name, description},
       {new: true}
@@ -74,7 +85,8 @@ export const updateCategory = async (req, res) => {
 export const deleteCategory = async (req, res) => {
   try {
     const {id} = req.params;
-    await CategoryModel.findByIdAndDelete(id);
+    // await CategoryModel.findByIdAndDelete(id);
+    await deleteCategoryR(id)
     res.json({
       msg: 'category deleted successfully'
     })

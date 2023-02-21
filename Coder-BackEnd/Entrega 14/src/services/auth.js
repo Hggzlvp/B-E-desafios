@@ -1,9 +1,8 @@
 import passport from 'passport';
 import { Strategy as LocalStrategy } from 'passport-local';
-import { UserModel } from '../models/user.model.js';
 import { logger } from '../utils/logger.js';
 
-import {signupf} from "../persistencia/Repository/repostory.js"
+import {deserializeUserR, loginR, signupR} from "../persistencia/Repository/repostory.js"
 
 const currentUser={}
 
@@ -18,21 +17,23 @@ const signup = async (req, username, password, done) => {
   try {
     const {email,number}= req.body
     // const newUser = new UserModel({username, password,email,number});
-    const newUser = signupf({username, password,email,number})
+    const newUser = signupR({username, password,email,number})
+    console.log(newUser)
     newUser.password = await newUser.encryptPassword(password);
     await newUser.save();
     return done(null, newUser);
 
   } catch (error) {
     logger.error(error);
-    return done(null, false,{ message: 'Error inesperado' });
+    return done(null, false,{ message: 'Error inesperadoOO' });
   }
 };
 
 
 const login = async (req, username, password, done) => {
   logger.info('LOGIN!');
-  const user = await UserModel.findOne({username});
+  // const user = await UserModel.findOne({username});
+  const user = await loginR({username})
   if (!user) {
     return done(null, false, { message: 'User not found' });
   } 
@@ -55,6 +56,7 @@ passport.serializeUser((user, done)=>{
 
 passport.deserializeUser( async(userId, done)=>{
   logger.info('ejecuta deserialize');
-  const user = await UserModel.findById(userId);
+  // const user = await UserModel.findById(userId);
+  const user = await deserializeUserR(userId)
   return done(null, user);
 });

@@ -1,4 +1,4 @@
-import { getDao } from "../Daos/Factory.js";
+import { getDaoCart, getDaoCategory, getDaoProduct, getDaoUser } from "../Daos/Factory.js";
 
 import { cartsDto } from "../Dto/dtoCart.js";
 import { categorysDto } from "../Dto/dtoCategorys.js";
@@ -7,151 +7,143 @@ import { usersDto } from "../Dto/dtoUser.js";
 
 
 
+const daoCart = getDaoCart()
+const daoCategory = getDaoCategory()
+const daoProduct = getDaoProduct()
+const daoUser = getDaoUser()
 
-// export default class NewsRepository {
-//     constructor() {
-//         this.dao = getDao();
-//     }
-
-//     async getAllNews() {
-//         const listNews = await this.dao.getAllNews();
-//         const listNewsDTO = newsDTO(listNews);
-//         return listNewsDTO;
-//     }
-// }
-
-const dao=getDao()
 
 
 // CART
-export const getAllCartf = async()=> {
-    const listNews = await dao.getAllCart();
+export const getAllCartR = async()=> {
+    const listNews = await daoCart.getAllCart();
     const listNewsDTO = cartsDto(listNews);
     return listNewsDTO
 }
-export const getCartByIdf = async(id)=> {
-    const listNews = await dao.getCartById(id);
+export const getCartByIdR = async(id)=> {
+    const listNews = await daoCart.getCartById(id);
     const listNewsDTO = cartsDto(listNews);
     return listNewsDTO
 }
-export const createCartf = async(newCart)=> {
-    const listNews = await dao.createCart(newCart);
+export const createCartR = async(newCart)=> {
+    const listNews = await daoCart.createCart(newCart);
     const listNewsDTO = cartsDto(listNews);
     return listNewsDTO
 }
-export const deleteCartf = async(id)=> {
-    const listNews = await dao.deleteCart(id);
+export const deleteCartR = async(id)=> {
+    const listNews = await daoCart.deleteCart(id);
     const listNewsDTO = cartsDto(listNews);
     return listNewsDTO
 }
-export const deleteCartbuyf = async(id)=> {
-    const listNews = await dao.deleteCartbuy(id);
+export const deleteCartbuyR = async(id)=> {
+    const listNews = await daoCart.deleteCartbuy(id);
     const listNewsDTO = cartsDto(listNews);
     return listNewsDTO
 }
-export const deleteProductByCartf = async(idCart)=> {
-    const listNews = await dao.deleteProductByCart(idCart);
+export const deleteProductByCartR = async(idCart)=> {
+    const listNews = await daoCart.deleteProductByCart(idCart);
     const listNewsDTO = cartsDto(listNews);
     return listNewsDTO
 }
 // DUDA SOBRE DOS CONSULTAS A DB
-export const productsByCartIdf = async(idCart,idProduct)=> {
-    const listNews = await dao.productsByCartId(idCart,idProduct);
+export const productsByCartIdR = async(idCart,idProduct)=> {
+    const listNews = await daoCart.productsByCartId(idCart,idProduct);
     const listNewsDTO = cartsDto(listNews);
     return listNewsDTO
 }
-export const buyCartf = async(idCart)=> {
-    const listNews = await dao.buyCart(idCart);
+export const buyCartR = async(idCart)=> {
+    const listNews = await daoCart.buyCart(idCart);
     const listNewsDTO = cartsDto(listNews);
     return listNewsDTO
 }
 
 
 // CATEGORYS
-export const getAllCategories = async () => {
-    const listNews = await dao.getAllCategories();
+export const getAllCategoriesR = async () => {
+    const listNews = await daoCategory.getAllCategories();
     const listNewsDTO = categorysDto(listNews);
     return listNewsDTO
   };
   
-  export const getCategoryById = async (id) => {
-    const listNews = await dao.getCategoryById(id);
+  export const getCategoryByIdR = async (id) => {
+    const listNews = await daoCategory.getCategoryById(id);
     const listNewsDTO = categorysDto(listNews);
     return listNewsDTO
   };
   
-  export const createCategory = async (name,description) => {
-    const listNews = await dao.createCategory(name,description);
+  export const createCategoryR = async (name,description) => {
+    const listNews = await daoCategory.createCategory(name,description);
     const listNewsDTO = categorysDto(listNews);
     return listNewsDTO
   };
   
-  export const updateCategory = async (id,name,description) => {
-    const listNews = await dao.updateCategory(id,name,description);
+  export const updateCategoryR = async (id,name,description) => {
+    const listNews = await daoCategory.updateCategory(id,name,description);
     const listNewsDTO = categorysDto(listNews);
     return listNewsDTO
   };
   
-  export const deleteCategory = async (id) => {
-    const listNews = await dao.deleteCategory(id);
+  export const deleteCategoryR = async (id) => {
+    const listNews = await daoCategory.deleteCategory(id);
     const listNewsDTO = categorysDto(listNews);
     return listNewsDTO
   };
 
 
 // PRODUCTS
-export const checkBodyProduct = async (categoryId) => {
-    const listNews = await dao.checkBodyProduct(categoryId);
+export const checkBodyProductR = async (categoryId) => {
+    const listNews = await daoProduct.checkBodyProduct(categoryId);
     const listNewsDTO = productsDto(listNews);
     return listNewsDTO
 };
 
-export const getAllProducts= async (query) => {
-    const listNews = await dao.getAllProducts(query);
+export const getAllProductsR= async (query) => {
+    const listNews = await daoProduct.getAllProducts(query);
     const listNewsDTO = productsDto(listNews);
     return listNewsDTO
 }
 
-export const getProductById= async (id) => {
-    const listNews = await dao.getProductById(id);
+export const getProductByIdR= async (id) => {
+    const listNews = await daoProduct.getProductById(id);
     const listNewsDTO = productsDto(listNews);
     return listNewsDTO 
 }
 
-export const createProduct= async (name,description,stock,price,categoryId) => {
-    const listNews = await dao.createProduct(name,description,stock,price,categoryId);
+export const createProductR= async (name,description,stock,price,categoryId) => {
+    const listNews = await daoProduct.createProduct(name,description,stock,price,categoryId);
     const listNewsDTO = productsDto(listNews);
     return listNewsDTO
 }
 
-export const updateProduct= async (id) => {
-    const listNews = await dao.updateProduct(id);
+export const updateProductR= async (id) => {
+    const listNews = await daoProduct.updateProduct(id);
     const listNewsDTO = productsDto(listNews);
     return listNewsDTO 
 }
 
-export const deleteProduct = async (id) => {
-    const listNews = await dao.deleteProduct(id);
+export const deleteProductR = async (id) => {
+    const listNews = await daoProduct.deleteProduct(id);
     const listNewsDTO = productsDto(listNews);
     return listNewsDTO
 }
 
 
 // USERS
- export const signupf = async (username, password,email,number) => {
-    const listNews = await dao.signup(username, password,email,number);
+ export const signupR = async (username, password,email,number) => {
+    const listNews = await daoUser.signup(username, password,email,number);
     const listNewsDTO = usersDto(listNews);
+    console.log(listNewsDTO)
     return listNewsDTO
   };
   
-  export const loginf = async (username) => {
-    const listNews = await dao.login(username);
+  export const loginR = async (username) => {
+    const listNews = await daoUser.login(username);
     const listNewsDTO = usersDto(listNews);
     return listNewsDTO
   };
 
-  export const deserializeUserf = async(userId)=>{
-    const listNews = await dao.deserializeUser(userId);
+  export const deserializeUserR = async(userId)=>{
+    const listNews = await daoUser.deserializeUser(userId);
     const listNewsDTO = usersDto(listNews);
     return listNewsDTO
   };

@@ -71,3 +71,18 @@
 [31merror[39m || Invalid From and To pair. From and To should be of the same channel || Feb-06-2023 18:17:06
 [31merror[39m || Invalid login: 535 Authentication failed || Feb-06-2023 19:34:33
 [31merror[39m || newUser.encryptPassword is not a function || Feb-20-2023 19:18:36
+[31merror[39m || newUser.encryptPassword is not a function || Feb-21-2023 15:52:45
+[31merror[39m || Invalid login: 535 Authentication failed || Feb-21-2023 15:52:48
+[31merror[39m || Cannot set headers after they are sent to the client || Feb-21-2023 15:52:48
+[31merror[39m || newUser.encryptPassword is not a function || Feb-21-2023 15:54:36
+[31merror[39m || Invalid login: 535 Authentication failed || Feb-21-2023 15:54:38
+[31merror[39m || Cannot set headers after they are sent to the client || Feb-21-2023 15:54:38
+[31merror[39m || newUser.encryptPassword is not a function || Feb-21-2023 15:54:47
+[31merror[39m || Invalid login: 535 Authentication failed || Feb-21-2023 15:54:49
+[31merror[39m || Cannot set headers after they are sent to the client || Feb-21-2023 15:54:49
+[31merror[39m || newUser.encryptPassword is not a function || Feb-21-2023 16:02:18
+[31merror[39m || Invalid login: 535 Authentication failed || Feb-21-2023 16:02:20
+[31merror[39m || Cannot set headers after they are sent to the client || Feb-21-2023 16:02:20
+[31merror[39m || newUser.encryptPassword is not a function || Feb-21-2023 16:05:16
+[31merror[39m || Invalid login: 535 Authentication failed || Feb-21-2023 16:05:18
+[31merror[39m || Cannot set headers after they are sent to the client || Feb-21-2023 16:05:18

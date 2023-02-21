@@ -1,4 +1,4 @@
-import { ProductsModel } from "../../../models/productos";
+import { ProductsModel } from "../../../models/productos.js"
 import {logger} from "../../../utils/logger.js" 
 
 export const checkBodyProduct = async (categoryId) => {

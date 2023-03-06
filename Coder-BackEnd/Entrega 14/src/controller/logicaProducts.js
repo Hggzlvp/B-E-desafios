@@ -1,5 +1,5 @@
 import { ProductsModel } from "../models/productos.js";
-import { checkBodyProductR, createProductR, deleteProductR, getAllProductsR, getProductByIdR, updateProductR } from "../persistencia/Repository/repostory.js";
+import { checkBodyProductR, createProductR, deleteProductR, getAllProductsR, getProductByIdR, updateProductR,updateProductDosR } from "../persistencia/Repository/repostory.js";
 
     export const checkBodyProduct = async (req, res, next) => {
         const { name, description, stock, price, categoryId } = req.body;
@@ -93,7 +93,8 @@ import { checkBodyProductR, createProductR, deleteProductR, getAllProductsR, get
         
         try {
             const {id} = req.params;
-            const {name,description,stock,price,categoryId}=req.body;
+            const {name,description,stock,price}=req.body;
+            console.log("logicaproduct",req.body)
 
             // const product=await ProductsModel.findById(id);
             const product=await updateProductR(id)
@@ -103,11 +104,14 @@ import { checkBodyProductR, createProductR, deleteProductR, getAllProductsR, get
                 msg:"producto no encontrado"
             });
 
-            const productUpdated = await ProductsModel.findByIdAndUpdate(
+            const productUpdated = await updateProductDosR({
                 id,
-                {name,description,stock,price,categoryId},
-                {new:true}
-            );
+                name,
+                description,
+                stock,
+                price,
+                new:true
+            });
             res.json({
                 msg:"producto actualizado correctamente",
                 data:productUpdated

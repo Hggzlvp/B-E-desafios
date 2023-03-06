@@ -86,12 +86,16 @@ export const getProductById= async (id) => {
     return await daoProduct.getProductById(id)  
 }
 
-export const createProduct= async ({name,description,stock,price,categoryId}) => {
-    return await daoProduct.createProduct({name,description,stock,price,categoryId})
+export const createProduct= async ({name,description,stock,price}) => {
+    return await daoProduct.createProduct({name,description,stock,price})
 }
 
 export const updateProduct= async (id) => {
     return await daoProduct.updateProduct(id)  
+}
+
+export const updateProductDos= async ({id,name,description,stock,price,categoryId}) => {
+    return await daoProduct.updateProductDos({id,name,description,stock,price,categoryId})  
 }
 
 export const deleteProduct = async (id) => {

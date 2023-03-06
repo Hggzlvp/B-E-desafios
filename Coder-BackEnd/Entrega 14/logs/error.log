@@ -210,3 +210,43 @@
 [31merror[39m || Cast to ObjectId failed for value "{ id: undefined, name: undefined, description: undefined }" (type Object) at path "_id" for model "category" || Mar-05-2023 18:56:48
 [31merror[39m || Cast to ObjectId failed for value "{ id: undefined, name: undefined, description: undefined, new: true }" (type Object) at path "_id" for model "category" || Mar-05-2023 18:59:07
 [31merror[39m || Cast to string failed for value "{ name: 'telefono', description: 'high-end' }" (type Object) at path "name" || Mar-05-2023 19:06:50
+[31merror[39m || Cast to string failed for value "{ name: 'telefono', description: 'high-end' }" (type Object) at path "name" || Mar-06-2023 14:52:02
+[31merror[39m || Cast to string failed for value "{ name: 'telefono', description: 'high-end' }" (type Object) at path "name" || Mar-06-2023 14:57:45
+[31merror[39m || Cast to ObjectId failed for value "{
+  id: '63d70d8a49838059ec7276ce',
+  name: 'aaaaaa ',
+  description: 'aaaaa',
+  stock: 666,
+  price: 66666,
+  categoryId: '6388070953576b9c550aa2db'
+}" (type Object) at path "_id" for model "product" || Mar-06-2023 15:24:36
+[31merror[39m || Cast to ObjectId failed for value "{
+  id: '63d70d8a49838059ec7276ce',
+  name: 'aaaaaa ',
+  description: 'aaaaa',
+  stock: 666,
+  price: 66666,
+  categoryId: undefined
+}" (type Object) at path "_id" for model "product" || Mar-06-2023 15:31:36
+[31merror[39m || Cast to ObjectId failed for value "{
+  id: '63d70d8a49838059ec7276ce',
+  name: 'aaaaaa ',
+  description: 'aaaaa',
+  stock: 666,
+  price: 66666
+}" (type Object) at path "_id" for model "product" || Mar-06-2023 15:33:34
+[31merror[39m || Cast to ObjectId failed for value "{
+  id: '63d70d8a49838059ec7276ce',
+  name: 'aaaaaa ',
+  description: 'aaaaa',
+  stock: 666,
+  price: 66666
+}" (type Object) at path "_id" for model "product" || Mar-06-2023 15:35:54
+[31merror[39m || Operation `products.findOne()` buffering timed out after 10000ms || Mar-06-2023 15:37:51
+[31merror[39m || Cast to ObjectId failed for value "{
+  id: '63d70d8a49838059ec7276ce',
+  name: 'aaaaaa ',
+  description: 'aaaaa',
+  stock: 666,
+  price: 66666
+}" (type Object) at path "_id" for model "product" || Mar-06-2023 15:38:28

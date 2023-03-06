@@ -76,9 +76,8 @@ export const getAllCategoriesR = async () => {
     return listNewsDTO
   };
   
-  export const updateCategoryR = async (id,name,description) => {
-    const listNews = await daoCategory.updateCategory(id,name,description);
-    // console.log("REPOSITORY",listNews) DEVUELVE NULL
+  export const updateCategoryR = async ({id,name,description}) => {
+    const listNews = await daoCategory.updateCategory({id,name,description});
     const listNewsDTO = categorysDto(listNews);
     return listNewsDTO
   };
@@ -119,6 +118,12 @@ export const updateProductR= async (id) => {
     const listNews = await daoProduct.updateProduct(id);
     const listNewsDTO = productsDto(listNews);
     return listNewsDTO 
+}
+
+export const updateProductDosR= async ({id,name,description,stock,price}) => {
+  const listNews = await daoProduct.updateProductDos({id,name,description,stock,price});
+  const listNewsDTO = productsDto(listNews);
+  return listNewsDTO 
 }
 
 export const deleteProductR = async (id) => {

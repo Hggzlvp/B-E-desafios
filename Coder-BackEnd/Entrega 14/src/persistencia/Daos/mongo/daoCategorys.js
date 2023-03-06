@@ -32,17 +32,14 @@ import {logger} from "../../../utils/logger.js"
     }
   };
   
-  export const updateCategory = async (id,name,description) => {
+  export const updateCategory = async ({id,name,description}) => {
     try {
-      console.log("id",id)
-      console.log("a",name)
-      console.log("b",description)
+
         const response = await CategoryModel.findByIdAndUpdate(
             id,
             {name,description},
             {new: true}
         );
-        console.log("f",response)
         return response;
     } catch (error) {
         logger.error(error);

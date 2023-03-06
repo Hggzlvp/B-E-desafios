@@ -68,11 +68,12 @@ export const updateCategory = async (req, res) => {
     //   {name, description},
     //   {new: true}
     // );
-    const categoryUpdated = await updateCategoryR(
+    const categoryUpdated = await updateCategoryR({
       id,
-      {name, description},
-      {new: true}
-    );
+      name,
+      description,
+      new: true
+    });
     res.json({
       msg: 'category updated',
       data: categoryUpdated,

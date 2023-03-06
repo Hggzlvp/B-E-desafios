@@ -55,9 +55,15 @@ export const updateProduct= async (id) => {
     }    
 }
 
-export const updateProductDos= async (id) => {
+export const updateProductDos= async ({id,name,description,stock,price}) => {
     try {
-        const response = await ProductsModel.findByIdAndUpdate(id);
+        console.log("UPDATEdos",id,name,description,stock,price)
+        const response = await ProductsModel.findByIdAndUpdate(
+            id,
+            {name,description,stock,price},
+            {new:true}
+        );
+        console.log(response)
         return response;
     } catch (error) {
         logger.error(error);

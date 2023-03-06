@@ -25,7 +25,8 @@ switch(selectedDAO) {
 
 // CART
 export const getAllCart = async()=> {
-    return await daoCart.getAllCart()
+    const carritos= await daoCart.getAllCart()
+    return carritos;
 }
 export const getCartById = async(id)=> {
     return await daoCart.getCartById(id)
@@ -85,8 +86,8 @@ export const getProductById= async (id) => {
     return await daoProduct.getProductById(id)  
 }
 
-export const createProduct= async (name,description,stock,price,categoryId) => {
-    return await daoProduct.createProduct(name,description,stock,price,categoryId)
+export const createProduct= async ({name,description,stock,price,categoryId}) => {
+    return await daoProduct.createProduct({name,description,stock,price,categoryId})
 }
 
 export const updateProduct= async (id) => {
@@ -99,8 +100,8 @@ export const deleteProduct = async (id) => {
 
 
 // USERS
- export const signup = async (username, password,email,number) => {
-    return await daoUser.signup(username, password,email,number)
+ export const signup = async ({username, password,email,number,admin}) => {
+    return await daoUser.signup({username, password,email,number,admin})
   };
   
   export const login = async (username) => {

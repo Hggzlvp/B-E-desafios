@@ -69,14 +69,7 @@ import { checkBodyProductR, createProductR, deleteProductR, getAllProductsR, get
         try {
             const {name,description,stock,price,categoryId}=req.body;
 
-            // const newProduct= await ProductsModel.create({
-            //     name,
-            //     description,
-            //     stock,
-            //     price,
-            //     categoryId,
-            // })
-            const newProduct= await createProductR.create({
+            const newProduct= await createProductR({
                 name,
                 description,
                 stock,

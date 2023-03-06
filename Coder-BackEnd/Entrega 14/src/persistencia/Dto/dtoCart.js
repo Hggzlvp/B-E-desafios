@@ -1,10 +1,8 @@
 export default class CartsDTO{
-    constructor({name,description,price,stock,categoryId}){
-        this.name = name
-        this.description=description
-        this.price = price
-        this.stock = stock
-        this.categoryId = categoryId
+    constructor({_id,timestap,productos}){
+        this.id = _id
+        this.timestap = timestap
+        this.productos = productos
     }
 }
 

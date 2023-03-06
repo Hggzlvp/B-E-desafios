@@ -7,7 +7,7 @@ import {logger} from "../../../utils/logger.js"
         const response = await CategoryModel.find();
         return response;
     } catch (error) {
-        logger.fatal(error);
+        logger.error(error);
     }
   };
   
@@ -16,11 +16,11 @@ import {logger} from "../../../utils/logger.js"
         const response = await CategoryModel.findById(id);
         return response;
     } catch (error) {
-        logger.fatal(error);
+        logger.error(error);
     }
   };
   
-  export const createCategory = async (name,description) => {
+  export const createCategory = async ({name,description}) => {
     try {
         const response =  await CategoryModel.create({
             name, 
@@ -28,20 +28,24 @@ import {logger} from "../../../utils/logger.js"
           });
         return response;
     } catch (error) {
-        logger.fatal(error);
+        logger.error(error);
     }
   };
   
   export const updateCategory = async (id,name,description) => {
     try {
+      console.log("id",id)
+      console.log("a",name)
+      console.log("b",description)
         const response = await CategoryModel.findByIdAndUpdate(
             id,
-            {name, description},
+            {name,description},
             {new: true}
         );
+        console.log("f",response)
         return response;
     } catch (error) {
-        logger.fatal(error);
+        logger.error(error);
     }
   };
   
@@ -50,6 +54,6 @@ import {logger} from "../../../utils/logger.js"
         const response = await CategoryModel.findByIdAndDelete(id);
         return response;
     } catch (error) {
-        logger.fatal(error);
+        logger.error(error);
     }
   };

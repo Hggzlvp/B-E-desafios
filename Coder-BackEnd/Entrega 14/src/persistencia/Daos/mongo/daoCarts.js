@@ -7,8 +7,9 @@ import {logger} from "../../../utils/logger.js"
     try {
         const response = await CartModel.find();
         return response;
+        
     } catch (error) {
-        logger.fatal(error);
+        logger.error(error);
     }
   };
   
@@ -17,7 +18,7 @@ import {logger} from "../../../utils/logger.js"
         const response = await CartModel.findById(id);
         return response;
     } catch (error) {
-        logger.fatal(error);
+        logger.error(error);
     }
   };
   
@@ -26,7 +27,7 @@ import {logger} from "../../../utils/logger.js"
         const response = await CartModel.create(newCart)
         return response;
     } catch (error) {
-        logger.fatal(error);
+        logger.error(error);
     }
   };
   
@@ -35,7 +36,7 @@ import {logger} from "../../../utils/logger.js"
         const response = await CartModel.findByIdAndDelete(id);
         return response;
     } catch (error) {
-        logger.fatal(error);
+        logger.error(error);
     }
   };
   
@@ -44,7 +45,7 @@ import {logger} from "../../../utils/logger.js"
         const response = await CartModel.findByIdAndDelete(id);
         return response;
     } catch (error) {
-        logger.fatal(error);
+        logger.error(error);
     }
   };
   
@@ -53,17 +54,17 @@ import {logger} from "../../../utils/logger.js"
         const response = await CartModel.findById(idCart);
         return response;
     } catch (error) {
-        logger.fatal(error);
+        logger.error(error);
     }
   };
   
-  export const productsByCartId= async (idCart,idProduct) => {
+  export const productsByCartId= async ({idCart,idProduct}) => {
     try {
         const responseCart = await CartModel.findById(idCart);
         const responseProduct = await ProductsModel.findById(idProduct);
-        return responseCart,responseProduct
+        return {responseCart,responseProduct}
     } catch (error) {
-        logger.fatal(error);
+        logger.error(error);
     }
   }
   
@@ -72,6 +73,6 @@ import {logger} from "../../../utils/logger.js"
         const response = await CartModel.findById(idCart)
         return response;
     } catch (error) {
-        logger.fatal(error);
+        logger.error(error);
     }
   }

@@ -46,10 +46,9 @@ export const deleteProductByCartR = async(idCart)=> {
     return listNewsDTO
 }
 // DUDA SOBRE DOS CONSULTAS A DB
-export const productsByCartIdR = async(idCart,idProduct)=> {
-    const listNews = await daoCart.productsByCartId(idCart,idProduct);
-    const listNewsDTO = cartsDto(listNews);
-    return listNewsDTO
+export const productsByCartIdR = async({idCart,idProduct})=> {
+    const listNews = await daoCart.productsByCartId({idCart,idProduct});
+    return listNews
 }
 export const buyCartR = async(idCart)=> {
     const listNews = await daoCart.buyCart(idCart);
@@ -71,14 +70,15 @@ export const getAllCategoriesR = async () => {
     return listNewsDTO
   };
   
-  export const createCategoryR = async (name,description) => {
-    const listNews = await daoCategory.createCategory(name,description);
+  export const createCategoryR = async ({name,description}) => {
+    const listNews = await daoCategory.createCategory({name,description});
     const listNewsDTO = categorysDto(listNews);
     return listNewsDTO
   };
   
   export const updateCategoryR = async (id,name,description) => {
     const listNews = await daoCategory.updateCategory(id,name,description);
+    // console.log("REPOSITORY",listNews) DEVUELVE NULL
     const listNewsDTO = categorysDto(listNews);
     return listNewsDTO
   };
@@ -109,8 +109,8 @@ export const getProductByIdR= async (id) => {
     return listNewsDTO 
 }
 
-export const createProductR= async (name,description,stock,price,categoryId) => {
-    const listNews = await daoProduct.createProduct(name,description,stock,price,categoryId);
+export const createProductR= async ({name,description,stock,price,categoryId}) => {
+    const listNews = await daoProduct.createProduct({name,description,stock,price,categoryId});
     const listNewsDTO = productsDto(listNews);
     return listNewsDTO
 }
@@ -129,8 +129,8 @@ export const deleteProductR = async (id) => {
 
 
 // USERS
- export const signupR = async (username, password,email,number) => {
-    const listNews = await daoUser.signup(username, password,email,number);
+ export const signupR = async ({username, password,email,number,admin}) => {
+    const listNews = await daoUser.signup({username, password,email,number,admin});
     const listNewsDTO = usersDto(listNews);
     console.log(listNewsDTO)
     return listNewsDTO

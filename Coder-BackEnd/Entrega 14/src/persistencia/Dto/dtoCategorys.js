@@ -7,7 +7,7 @@ export default class CategoryDTO{
 
 export const categorysDto = (data) => {
     if(Array.isArray(data)){
-        return data.map(category => new CategoryDTO(category))
+        return data.map(category => new CategoryDTO(category)) 
     }else{
         return new CategoryDTO(data)
     }

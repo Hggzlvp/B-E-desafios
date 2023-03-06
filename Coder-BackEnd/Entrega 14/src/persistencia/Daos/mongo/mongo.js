@@ -10,10 +10,13 @@ dotenv.config();
 
         mongoose.connect(process.env.MONGO_ATLAS_SRV, (err) => {
         if(err){
-            logger.fatal(err)
+            logger.error(err)
         } else {
             logger.info('Conectado a MongoDB!')
         }
     });
+
+
+    
 }
 

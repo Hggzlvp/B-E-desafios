@@ -1,10 +1,11 @@
-import { createCategoryR, getAllCategoriesR, getCartByIdR, updateCategoryR } from '../persistencia/Repository/repostory.js';
+import { createCategoryR, getAllCategoriesR, getCategoryByIdR, updateCategoryR ,deleteCategoryR} from '../persistencia/Repository/repostory.js';
 
 
 export const getAllCategories = async (req, res) => {
   try {
     // const categories = await CategoryModel.find();
     const categories = await getAllCategoriesR()
+    // console.log(categories)
     res.json({
       data: categories
     });
@@ -20,7 +21,7 @@ export const getCategoryById = async (req, res) => {
   try {
     const { id } = req.params;
     // const category = await CategoryModel.findById(id)
-    const category = await getCartByIdR(id)
+    const category = await getCategoryByIdR(id)
     if(!category)
      return res.status(404).json({
       msg: 'Category not found!'
@@ -61,6 +62,7 @@ export const updateCategory = async (req, res) => {
   try {
     const { id } = req.params;
     const { name, description } = req.body;
+
     // const categoryUpdated = await CategoryModel.findByIdAndUpdate(
     //   id,
     //   {name, description},

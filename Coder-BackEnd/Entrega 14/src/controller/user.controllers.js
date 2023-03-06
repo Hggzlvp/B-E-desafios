@@ -25,6 +25,31 @@ export const signUp = (req, res, next) =>{
     })(req,res,next)
 };
 
+// export const login = (req, res,next) => {
+//     passport.authenticate('login',passportOptions, (error, user, info) =>{
+//         if(error){            
+//             return next(error)
+//         }
+//         if(!user){
+//             return res.status(401).json(info)
+//         }
+//         if(req.user){
+//             const username = req.user
+//             currentUser.name = username.name
+//             currentUser.number = username.number
+//             currentUser.email = username.email
+//             res.json({
+//                 msg: `Bienvenido, ${username.name}`
+//             })
+
+//         }
+//     } )(req,res,next)
+
+
+
+//     // res.json({ msg: 'Bienvenido!', user: req.user });
+// }
+
 export const login = (req, res,next) => {
     passport.authenticate('login',passportOptions, (error, user, info) =>{
         if(error){            
@@ -33,21 +58,21 @@ export const login = (req, res,next) => {
         if(!user){
             return res.status(401).json(info)
         }
-        if(req.user){
-            const username = req.user
-            currentUser.name = username.name
-            currentUser.number = username.number
-            currentUser.email = username.email
-            res.json({
-                msg: `Bienvenido, ${username.name}`
-            })
+        // if(req.user){
+        //     const username = req.user
+        //     const name = username.name
+        //     const number = username.number
+        //     const email = username.email
+        //     res.json({
+        //         msg: `Bienvenido, ${name}`
+        //     })
 
-        }
+        // }
     } )(req,res,next)
 
 
 
-    // res.json({ msg: 'Bienvenido!', user: req.user });
+    res.json({ msg: 'Bienvenido!', user: req.user });
 }
 
 export const getHome = (req, res) => {

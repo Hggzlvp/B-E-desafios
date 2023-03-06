@@ -6,7 +6,7 @@ export const checkBodyProduct = async (categoryId) => {
         const response = await ProductsModel.findById(categoryId);
         return response;
     } catch (error) {
-        logger.fatal(error);
+        logger.error(error);
     }
 };
 
@@ -15,7 +15,7 @@ export const getAllProducts= async (query) => {
         const response =  await ProductsModel.find(query)
         return response;
     } catch (error) {
-        logger.fatal(error);
+        logger.error(error);
     } 
 }
 
@@ -25,11 +25,11 @@ export const getProductById= async (id) => {
         const response = await ProductsModel.findById(id);
         return response;
     } catch (error) {
-        logger.fatal(error);
+        logger.error(error);
     }   
 }
 
-export const createProduct= async (name,description,stock,price,categoryId) => {
+export const createProduct= async ({name,description,stock,price,categoryId}) => {
     
     try {
         const response = await ProductsModel.create({
@@ -41,7 +41,7 @@ export const createProduct= async (name,description,stock,price,categoryId) => {
         })
         return response;
     } catch (error) {
-        logger.fatal(error);
+        logger.error(error);
     }  
 }
 
@@ -51,8 +51,17 @@ export const updateProduct= async (id) => {
         const response = await ProductsModel.findById(id);
         return response;
     } catch (error) {
-        logger.fatal(error);
+        logger.error(error);
     }    
+}
+
+export const updateProductDos= async (id) => {
+    try {
+        const response = await ProductsModel.findByIdAndUpdate(id);
+        return response;
+    } catch (error) {
+        logger.error(error);
+    } 
 }
 
 export const deleteProduct = async (id) => {
@@ -60,7 +69,7 @@ export const deleteProduct = async (id) => {
         const response = await ProductsModel.findByIdAndDelete(id);
         return response;
     } catch (error) {
-        logger.fatal(error);
+        logger.error(error);
     }
 }
 

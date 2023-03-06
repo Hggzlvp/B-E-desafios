@@ -97,16 +97,16 @@ export const deleteProductByCart = async (req, res) => {
 
         // const dataCart = await CartModel.findById(idCart);
         const dataCart = await deleteProductByCartR(idCart);
-
         const indexProducto = dataCart.productos.findIndex((itemId) => itemId.id == idProduct)
-
+        
         if (indexProducto < 0) {
           throw "El producto no existe";
         }
 
         dataCart.productos.splice(indexProducto,1)
         
-        await CartModel.create(dataCart)
+        // await CartModel.create(dataCart)
+        await createCartR(dataCart)
 
         res.json({
            msg: `el producto con ${idProduct} fue eliminado del carrito ${idCart}`
@@ -118,7 +118,6 @@ export const deleteProductByCart = async (req, res) => {
       }
 };
 
-// DUDA EN ESTE DAO SOBRE LA DOBLE CONSULTA A LA DB (CONSULTAR CON TUTOR O PROFESOR)
 export const productsByCartId= async (req,res) => {
   try {
     
@@ -126,14 +125,13 @@ export const productsByCartId= async (req,res) => {
     const {id}=req.body;
     const idProduct=id;
 
-    // const dataCart = await CartModel.findById(idCart)
     // const dataProduct= await ProductsModel.findById(idProduct)
-    dataCart = await productsByCartIdR(idCart);
-    dataProduct = await productsByCartIdR(idProduct)
+    const dataCart = await productsByCartIdR({idCart,idProduct});
+ 
+    const DC=dataCart.responseProduct
+    dataCart.responseCart.productos.push(DC)
 
-    dataCart.productos.push(dataProduct)
-
-    await CartModel.create(dataCart)
+    await createCartR(dataCart.responseCart)
 
     res.json({
       msg: `el producto con ${idProduct} fue agregado al carrito ${idCart}`
@@ -156,6 +154,7 @@ export const buyCart= async (req,res) => {
     
   await sendMailEthereal("Compra de pepito",nombresProductos.toLocaleString())
   // await CartModel.findByIdAndDelete(idCart);
+  await deleteCartR(idCart)
   
   await sendSMS(`su lista de productos es:${nombresProductos}`)
   await sendWSP(`su lista de productos es:${nombresProductos}`)

@@ -4,10 +4,7 @@ import * as Product from "./mongo/daoProducts.js";
 import * as User from "./mongo/daoUser.js";
 import { initDaoMongo } from "./mongo/mongo.js";
 
-// const selectedDAO = process.argv[2];
-
-const selectedDAO= "mongo" //PARA TEST EN LOCAL
-
+const selectedDAO = process.argv[2];
 let daoCart=null;
 let daoCategory=null;
 let daoProduct=null

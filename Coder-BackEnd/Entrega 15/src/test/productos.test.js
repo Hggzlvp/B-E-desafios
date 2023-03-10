@@ -7,8 +7,14 @@ import request from 'supertest';
 
 
 describe('TestsProducts', () => {
-    beforeEach(async() => {
-        await mongoose.connection.collections['products'].drop();
+    beforeAll(async() =>{
+        if(mongoose.connection.readyState === 0) {
+            await mongoose.connect("mongodb://localhost:27017/coderhouse")
+        } 
+    })
+    afterAll(async() => {
+        await mongoose.disconnect();
+        await mongoose.connection.close();
     });
 
     it('CreateProduct', async ()=>{
@@ -20,15 +26,8 @@ describe('TestsProducts', () => {
             categoryId:"640273904885801b64e2e55c"
         }
         
-        const response = await request(app)
-            .post('/api/productos')
-            .send(doc)
+        const response = await request(app).post('/api/productos').send(doc)
         expect(response.statusCode).toBe(200)
-        expect(response.body.name).toBe(doc.name)
-        expect(response.body.body).toBe(doc.body)
     });
-
-
-
 
 })

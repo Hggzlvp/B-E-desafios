@@ -250,17 +250,3 @@
   stock: 666,
   price: 66666
 }" (type Object) at path "_id" for model "product" || Mar-06-2023 15:38:28
-[31merror[39m || product validation failed: categoryId: Cast to ObjectId failed for value "123123" (type string) at path "categoryId" because of "BSONTypeError" || Mar-07-2023 21:46:07
-[31merror[39m || Operation `products.insertOne()` buffering timed out after 10000ms || Mar-07-2023 21:50:05
-[31merror[39m || Operation `products.insertOne()` buffering timed out after 10000ms || Mar-07-2023 21:58:15
-[31merror[39m || Operation `products.insertOne()` buffering timed out after 10000ms || Mar-07-2023 22:01:30
-[31merror[39m || Operation `products.insertOne()` buffering timed out after 10000ms || Mar-08-2023 20:18:52
-[31merror[39m || Operation `products.insertOne()` buffering timed out after 10000ms || Mar-08-2023 20:20:23
-[31merror[39m || Operation `products.insertOne()` buffering timed out after 10000ms || Mar-08-2023 20:22:11
-[31merror[39m || Operation `products.insertOne()` buffering timed out after 10000ms || Mar-08-2023 20:24:18
-[31merror[39m || Operation `products.insertOne()` buffering timed out after 10000ms || Mar-08-2023 20:26:01
-[31merror[39m || Operation `products.insertOne()` buffering timed out after 10000ms || Mar-08-2023 20:30:48
-[31merror[39m || Operation `products.insertOne()` buffering timed out after 10000ms || Mar-08-2023 22:21:08
-[31merror[39m || Operation `products.insertOne()` buffering timed out after 10000ms || Mar-08-2023 22:49:11
-[31merror[39m || Operation `products.insertOne()` buffering timed out after 10000ms || Mar-08-2023 22:52:18
-[31merror[39m || Error: read ECONNRESET || Mar-08-2023 22:52:33

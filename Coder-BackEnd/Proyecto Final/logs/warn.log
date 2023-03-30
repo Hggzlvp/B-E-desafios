@@ -256,3 +256,5 @@
 [31merror[39m || Invalid login: 535 Authentication failed || Mar-18-2023 20:51:28
 [31merror[39m || Invalid login: 535 Authentication failed || Mar-18-2023 20:53:30
 [31merror[39m || Invalid login: 535 Authentication failed || Mar-18-2023 20:53:46
+[31merror[39m || Cast to ObjectId failed for value "{ idCart: undefined, idProduct: undefined }" (type Object) at path "_id" for model "cart" || Mar-28-2023 13:28:29
+[31merror[39m || Invalid login: 535 Authentication failed || Mar-28-2023 15:44:41

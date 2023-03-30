@@ -88,7 +88,7 @@ export const deleteCartbuy = async (req, res) => {
     });
   }
 };
-
+//original
 export const deleteProductByCart = async (req, res) => {
       try {
         const idCart=req.params.id;
@@ -103,9 +103,12 @@ export const deleteProductByCart = async (req, res) => {
           throw "El producto no existe";
         }
 
+        console.log(dataCart.productos,"PRODUCTOS")
+
         dataCart.productos.splice(indexProducto,1)
         
-        // await CartModel.create(dataCart)
+        console.log(dataCart.productos,"POST PRODUCTOS")
+
         await createCartR(dataCart)
 
         res.json({
@@ -118,6 +121,32 @@ export const deleteProductByCart = async (req, res) => {
       }
 };
 
+// export const deleteProductByCart= async (req,res) => {
+//   try {
+    
+//     const idCart=req.params.id;
+//     const {id}=req.body;
+//     const idProduct=id;
+
+//     // const dataProduct= await ProductsModel.findById(idProduct)
+//     const dataCart = await deleteProductByCartR({idCart,idProduct});
+//     const DC=dataCart.responseProduct
+//     dataCart.responseCart.productos.push(DC)
+    
+
+//     await createCartR(dataCart.responseCart)
+
+//     res.json({
+//       msg: `el producto con ${idProduct} fue borrado del carrito ${idCart}`
+//     })
+
+//   } catch (err) {
+//     res.status(500).json({
+//       error: err.message
+//     });
+//   } 
+// }
+
 export const productsByCartId= async (req,res) => {
   try {
     
@@ -127,7 +156,7 @@ export const productsByCartId= async (req,res) => {
 
     // const dataProduct= await ProductsModel.findById(idProduct)
     const dataCart = await productsByCartIdR({idCart,idProduct});
- 
+    
     const DC=dataCart.responseProduct
     dataCart.responseCart.productos.push(DC)
 

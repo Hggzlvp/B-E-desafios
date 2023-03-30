@@ -137,7 +137,6 @@ export const deleteProductR = async (id) => {
  export const signupR = async ({username, password,email,number,admin}) => {
     const listNews = await daoUser.signup({username, password,email,number,admin});
     const listNewsDTO = usersDto(listNews);
-    console.log(listNewsDTO)
     return listNewsDTO
   };
   
